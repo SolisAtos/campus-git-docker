@@ -55,3 +55,28 @@ The persistence is done by the `-v $pwd/mssql/data:/var/opt/mssql/data -v $pwd/m
 In SQL Server Management Studio use `.,1433` in the "Server name", `sa` in the "login" field and the password chosen in the `MSSQL_SA_PASSWORD` environment variable in the "password" field. In this example the password is `Passw0rd`.
 
 If the connection is successful the SQL Server Management Studio will load in the Object Explorer (right hand side) the properties of the database.
+
+# Commands to upload changes to a remote git repository
+First we have to create the remote repository. In this example I'm using GitHub.
+
+Then we have to create a local repository. To do this, open the directory of the project that you want to add version control to and run the `git init` command.
+
+Now we have to add the remote repository to the local repository by executing the following commands:
+
+```sh
+git remote add origin https://github.com/SolisAtos/campus-git-docker.git
+git branch -M main
+git push -u origin main
+```
+
+Make sure to replace `https://github.com/SolisAtos/campus-git-docker.git` with the remote repository created in GitHub.
+
+Now that the remote repository is added, we are ready to upload some changes.
+
+Add or modify one or more files that you want to track and then add the changes using the `git add .`. Here the `.` is telling git to stage all changes that have been done. Another option is to replace `.` with a specific filename of the specific file you want to track.
+
+Once the changes have been staged, you need to commit them using `git commit -m "Message"` where `"Message"` is a short description of the changes that you made.
+
+Now we are ready to push the changes to the remote repository. The easiest way is to just run the `git push` command, which will automatically push to `origin` the current branch. To have greater control of the push, you can run `git push origin main` and substitute `origin` and `main` for the specific remote and branch that you want to push to the remote repository.
+
+After running the last command, all changes will be uploaded to the remote repository.
